@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios'
 import { Table } from 'react-bootstrap'
 
-const List = () => {
+const List = (props) => {
+
+    const [events, setEvents] = useState([0])
+
+    useEffect(() => {
+        axios
+            .get('http://localhost:3001/events')
+            .then(response => {
+                console.log('promise fulfilled!!!')
+                setEvents(response.data)
+            })
+    }, [])
 
     return(
         <div className="container">
@@ -12,24 +24,14 @@ const List = () => {
             </div>
             */}
             <Table striped>
-            <tbody>
-                <tr>
+            {events.map(content => (
+                <tr  key={content.id}>
                     <td>
-                        <p>1. rivi</p>
-                    </td>
-                    <td>
-                        <p>kdfjhfdkjhsfdkjh</p>
+                        <p>{content.event}</p>
+                        <p>{content.place}</p>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <p>2. rivi</p>
-                    </td>
-                    <td>
-                        <p>jhgkjdkgjgdkjhdgk</p>
-                    </td>
-                </tr>
-            </tbody>
+            ))}
             </Table>
 
         </div>

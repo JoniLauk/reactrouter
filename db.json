@@ -1,0 +1,19 @@
+{
+  "events": [
+    {
+      "event": "Juhlat",
+      "place": "Koulu",
+      "id": 1
+    },
+    {
+      "event": "Juhlat2",
+      "place": "Koulu2",
+      "id": 2
+    },
+    {
+      "event": "sad",
+      "place": "asdsa3",
+      "id": 3
+    }
+  ]
+}
