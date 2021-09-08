@@ -11,9 +11,24 @@
       "id": 2
     },
     {
-      "event": "sad",
-      "place": "asdsa3",
+      "event": "Juhlat3",
+      "place": "Koulu3",
       "id": 3
+    },
+    {
+      "event": "Juhlat4",
+      "place": "Koulu4",
+      "id": 4
+    },
+    {
+      "event": "Juhlat",
+      "place": "Koulu",
+      "id": 5
+    },
+    {
+      "event": "Juhlat",
+      "place": "Koulu",
+      "id": 6
     }
   ]
 }

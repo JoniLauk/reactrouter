@@ -4,7 +4,7 @@ import {
     BrowserRouter as Router,
     Switch, Route, Link
 } from 'react-router-dom'
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Add from './components/Add'
 import Home from './components/Home'
 import List from './components/List'
