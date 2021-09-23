@@ -41,6 +41,11 @@
       "username": "joni@j",
       "password": "$2a$10$vTpZSQQGAXaw9sohAzoEDu3HtYiHDxqcHzleAtT0gHAc5qNZYj9/y",
       "id": 1
+    },
+    {
+      "username": "joni@joni",
+      "password": "$2a$10$lNS/XggRh4nJcFgXXnsnM.vdiT92Ftjnb.JM4Sp4hOc6yYC5/mPoC",
+      "id": 2
     }
   ]
 }
