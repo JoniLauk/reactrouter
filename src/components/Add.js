@@ -1,26 +1,43 @@
-import React, { useState, useEffect, props } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Add = (props) => {
   const [events, setEvents] = useState([props.events]);
-  const [newEvent, setNewEvent] = useState("a new event...");
-  const [newEventPlace, setNewEventPlace] = useState("a new event place...");
+  const [newEvent, setNewEvent] = useState("");
+  const [newEventPlace, setNewEventPlace] = useState("");
+  const [validated, setValidated] = useState(false);
 
   const addEvent = (event) => {
-    event.preventDefault();
-    const eventObject = {
-      event: newEvent,
-      place: newEventPlace,
-    };
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    } else {
+      setValidated(true);
+      event.preventDefault();
+      const eventObject = {
+        event: newEvent,
+        place: newEventPlace,
+      };
 
-    setEvents(events.concat(eventObject));
-    console.log(eventObject.event);
-    setNewEvent("");
-    setNewEventPlace("");
+      setEvents(events.concat(eventObject));
+      console.log(eventObject.event);
+      setNewEvent("");
+      setNewEventPlace("");
 
-    axios.post("http://localhost:3001/events", eventObject).then((response) => {
-      console.log(response);
-    });
+      axios
+        .post("http://localhost:3001/events", eventObject)
+        .then((response) => {
+          console.log(response);
+        });
+      alert("Event is submitted. See list tab!");
+    }
+
+    setValidated(true);
   };
 
   const handleEventChange = (event) => {
@@ -35,11 +52,32 @@ const Add = (props) => {
 
   return (
     <div className="events">
-      <form onSubmit={addEvent}>
-        <input value={newEvent} onChange={handleEventChange} /> <br></br>
-        <input value={newEventPlace} onChange={handleEventPlaceChange} />
-        <button type="submit">save</button>
-      </form>
+      <Form id="myForm" noValidate validated={validated} onSubmit={addEvent}>
+        <Form.Group className="mb-3" controlId="formBasicEvent">
+          <Form.Label>Event</Form.Label>
+          <Form.Control
+            required
+            onChange={handleEventChange}
+            value={newEvent}
+            type="text"
+            placeholder="Name of the event"
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicEventPlace">
+          <Form.Label>Event place</Form.Label>
+          <Form.Control
+            required
+            onChange={handleEventPlaceChange}
+            value={newEventPlace}
+            type="text"
+            placeholder="Place of the event"
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
     </div>
   );
 };

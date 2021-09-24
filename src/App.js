@@ -1,10 +1,10 @@
-import React, { useState, useEffect, props } from "react";
-import axios from "axios";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
+import "bootstrap/dist/css/bootstrap.min.css";
 import Add from "./components/Add";
 import Home from "./components/Home";
 import List from "./components/List";
+import Login from "./components/Login";
 
 const App = () => {
   const padding = {
@@ -15,7 +15,7 @@ const App = () => {
     <div className="container">
       <Router>
         <div>
-          <Link style={padding} to="/">
+          <Link style={padding} to="/home">
             home
           </Link>
           <Link style={padding} to="/add">
@@ -34,6 +34,9 @@ const App = () => {
             <List />
           </Route>
           <Route path="/">
+            <Login />
+          </Route>
+          <Route path="/home">
             <Home />
           </Route>
         </Switch>
