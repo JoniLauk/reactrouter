@@ -14,6 +14,11 @@
       "event": "sad",
       "place": "asdsa3",
       "id": 3
+    },
+    {
+      "event": "Uusi tapahtuma",
+      "place": "Uusi paikka",
+      "id": 4
     }
   ]
 }
