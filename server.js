@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const jwt = require("jsonwebtoken");
 
 const events = [
   {
@@ -28,8 +29,14 @@ app.get("/events", (req, res) => {
   res.json(events);
 });
 
-app.get("./login", (req, res) => {
+app.post("./login", (req, res) => {
   //auth
+
+  const username = req.body.username;
+  const user = { name: username };
+
+  const accesToken = jwt.sign(user, process.env.ACCES_TOKEN_SECRET);
+  res.json({ accesToken, accesToken });
 });
 
 app.listen(3001);
