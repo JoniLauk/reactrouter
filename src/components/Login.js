@@ -11,6 +11,7 @@ const Login = () => {
   const [redirect, setRedirect] = useState("");
   const bcrypt = require("bcryptjs");
   const salt = bcrypt.genSaltSync(10);
+
   function validateForm() {
     return email.length > 0 && password.length > 0;
   }
@@ -47,6 +48,8 @@ const Login = () => {
               console.log(res);
             });
           });
+          console.log(require("crypto").randomBytes(256).toString("base64"));
+          setRedirect("/home");
           setRedirect("/home");
         }
       });
