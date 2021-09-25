@@ -18,40 +18,15 @@ const Login = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
+
     axios
-      .get("http://localhost:3001/users", {
-        params: {
-          username: email,
-        },
+      .post("http://localhost:3001/users/login", {
+        username: email,
+        password: password,
       })
       .then((response) => {
         console.log(response);
-
-        if (response.data.length === 0) {
-          const userObject = {
-            username: email,
-            password: bcrypt.hashSync(password, salt),
-          };
-          axios
-            .post("http://localhost:3001/users", userObject)
-            .then((response) => {
-              console.log(response);
-            });
-          setEmail("");
-          setPassword("");
-          alert("New account created, pls login!");
-          setRedirect(null);
-        } else {
-          response.data.map((user) => {
-            console.log(user.password);
-            bcrypt.compare(password, user.password, function (err, res) {
-              console.log(res);
-            });
-          });
-          console.log(require("crypto").randomBytes(256).toString("base64"));
-          setRedirect("/home");
-          setRedirect("/home");
-        }
+        setRedirect("/home");
       });
   }
 

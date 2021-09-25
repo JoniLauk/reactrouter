@@ -1,59 +1,65 @@
 require("dotenv").config();
 
 const express = require("express");
-const app = express();
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
+const data = require("./db.json");
+const fs = require("fs");
+const bcrypt = require("bcryptjs");
+const app = express();
 
+app.use(cors());
 app.use(express.json());
 
-const events = [
-  {
-    event: "Juhlat",
-    place: "Koulu",
-    id: 1,
-  },
-  {
-    event: "Juhlat2",
-    place: "Koulu2",
-    id: 2,
-  },
-  {
-    event: "sad",
-    place: "asdsa3",
-    id: 3,
-  },
-  {
-    event: "Uusi tapahtuma",
-    place: "Uusi paikka",
-    id: 4,
-  },
-];
-
-const users = [
-  {
-    username: "joni@j",
-    password: "$2a$10$vTpZSQQGAXaw9sohAzoEDu3HtYiHDxqcHzleAtT0gHAc5qNZYj9/y",
-    id: 1,
-  },
-  {
-    username: "joni@joni",
-    password: "$2a$10$lNS/XggRh4nJcFgXXnsnM.vdiT92Ftjnb.JM4Sp4hOc6yYC5/mPoC",
-    id: 2,
-  },
-];
-
 app.get("/users", (req, res) => {
-  res.json(users);
+  res.json(data.users);
+});
+
+app.post("/users", async (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const user = { username: req.body.username, password: hashedPassword };
+    data.users.push(user);
+    fs.writeFile("db.json", JSON.stringify(data), "utf8", function (error) {});
+    res.status(201).send();
+  } catch {
+    res.status(500).send();
+  }
+});
+
+app.post("/users/login", async (req, res) => {
+  const user = data.users.find((user) => user.username === req.body.username);
+  if (user === null) {
+    return res.status(400).send("Cannot find user");
+  }
+  try {
+    if (await bcrypt.compare(req.body.password, user.password)) {
+      res.send("Success");
+    } else {
+      res.send("Not allowed");
+    }
+  } catch {
+    res.status(500).send();
+  }
 });
 
 app.post("/login", (req, res) => {
-  //auth
+  //Auth
 
   const username = req.body.username;
   const user = { name: username };
 
   const accesToken = jwt.sign(user, process.env.ACCES_TOKEN_SECRET);
-  res.json({ accesToken: accesToken });
+
+  res.json({ user: user, accesToken: accesToken });
+});
+
+app.get("/events", (req, res) => {
+  res.json(data.events);
+});
+
+app.post("/events", (req, res) => {
+  data.push(res.eventObject);
 });
 
 app.listen(3001);

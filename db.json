@@ -1,51 +1,17 @@
 {
   "events": [
-    {
-      "event": "Juhlat",
-      "place": "Koulu",
-      "id": 1
-    },
-    {
-      "event": "Juhlat2",
-      "place": "Koulu2",
-      "id": 2
-    },
-    {
-      "event": "Juhlat3",
-      "place": "Koulu3",
-      "id": 3
-    },
-    {
-      "event": "Juhlat4",
-      "place": "Koulu4",
-      "id": 4
-    },
-    {
-      "event": "Juhlat",
-      "place": "Koulu",
-      "id": 5
-    },
-    {
-      "event": "Juhlat",
-      "place": "Koulu",
-      "id": 6
-    },
-    {
-      "event": "testi",
-      "place": "testipaikka",
-      "id": 7
-    }
+    { "event": "Juhlat", "place": "Koulu", "id": 1 },
+    { "event": "Juhlat2", "place": "Koulu2", "id": 2 },
+    { "event": "Juhlat3", "place": "Koulu3", "id": 3 },
+    { "event": "Juhlat4", "place": "Koulu4", "id": 4 },
+    { "event": "Juhlat", "place": "Koulu", "id": 5 },
+    { "event": "Juhlat", "place": "Koulu", "id": 6 },
+    { "event": "testi", "place": "testipaikka", "id": 7 }
   ],
   "users": [
     {
-      "username": "joni@j",
-      "password": "$2a$10$vTpZSQQGAXaw9sohAzoEDu3HtYiHDxqcHzleAtT0gHAc5qNZYj9/y",
-      "id": 1
-    },
-    {
-      "username": "joni@joni",
-      "password": "$2a$10$lNS/XggRh4nJcFgXXnsnM.vdiT92Ftjnb.JM4Sp4hOc6yYC5/mPoC",
-      "id": 2
+      "username": "test@test",
+      "password": "$2a$10$uQpArf5Gid9kzK1TMkJptu9ukQ6lsmMa5kTuEFK280nqXnNjbrjU6"
     }
   ]
 }
