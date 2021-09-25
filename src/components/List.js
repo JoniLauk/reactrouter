@@ -7,7 +7,6 @@ const List = (props) => {
 
   useEffect(() => {
     axios.get("http://localhost:3001/events").then((response) => {
-      console.log("promise fulfilled!!!");
       setEvents(response.data);
     });
   }, []);

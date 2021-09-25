@@ -59,7 +59,9 @@ app.get("/events", (req, res) => {
 });
 
 app.post("/events", (req, res) => {
-  data.push(res.eventObject);
+  const event = { event: req.body.event, place: req.body.place };
+  data.events.push(event);
+  fs.writeFile("db.json", JSON.stringify(data), "utf8", function (error) {});
 });
 
 app.listen(3001);

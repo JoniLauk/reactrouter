@@ -30,7 +30,10 @@ const Add = (props) => {
       setNewEventPlace("");
 
       axios
-        .post("http://localhost:3001/events", eventObject)
+        .post("http://localhost:3001/events", {
+          event: newEvent,
+          place: newEventPlace,
+        })
         .then((response) => {
           console.log(response);
         });
