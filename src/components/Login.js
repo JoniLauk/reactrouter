@@ -24,8 +24,10 @@ const Login = () => {
         username: email,
         password: password,
       })
-      .then((response) => {
-        console.log(response);
+      .then((res) => {
+        const myStorage = window.localStorage;
+        myStorage.setItem("accesToken", res.data.accesToken);
+        console.log(res.data.accesToken);
         setRedirect("/home");
       });
   }
