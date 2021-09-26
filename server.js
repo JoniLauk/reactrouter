@@ -57,7 +57,7 @@ app.post("/login", (req, res) => {
   res.json({ user: user, accesToken: accesToken });
 });
 
-app.get("/events", (req, res) => {
+app.get("/events", authenticateToken, (req, res) => {
   res.json(data.events);
 });
 
@@ -66,5 +66,21 @@ app.post("/events", (req, res) => {
   data.events.push(event);
   fs.writeFile("db.json", JSON.stringify(data), "utf8", function (error) {});
 });
+
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+
+  console.log("token: " + token);
+
+  if (token == null) return res.sendStatus(401);
+
+  jwt.verify(token, process.env.ACCES_TOKEN_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    console.log("user (decoded) " + JSON.stringify(user));
+    next();
+  });
+}
 
 app.listen(3001);

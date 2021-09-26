@@ -19,26 +19,27 @@ const Add = (props) => {
     } else {
       setValidated(true);
       event.preventDefault();
-      const eventObject = {
-        event: newEvent,
-        place: newEventPlace,
-      };
 
-      setEvents(events.concat(eventObject));
-      console.log(eventObject.event);
-      setNewEvent("");
-      setNewEventPlace("");
+      const myStorage = window.localStorage;
+      const tokenObj = myStorage.getItem("accesToken");
 
       axios
-        .post("http://localhost:3001/events", {
-          event: newEvent,
-          place: newEventPlace,
-        })
+        .post(
+          "http://localhost:3001/events",
+          {
+            event: newEvent,
+            place: newEventPlace,
+          },
+          { headers: { Authorization: "Bearer: " + tokenObj } }
+        )
         .then((response) => {
           console.log(response);
         });
       alert("Event is submitted. See list tab!");
     }
+
+    setNewEvent("");
+    setNewEventPlace("");
 
     setValidated(true);
   };

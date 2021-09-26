@@ -3,6 +3,7 @@ GET http://localhost:3001/users
 ###
 
 GET http://localhost:3001/events
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdEB0ZXN0IiwiaWF0IjoxNjMyNjg2NzQyfQ.Cjs5VCioHf2a4QLJdWkDXSN18Ruc_y3yZ0aqijkV5XY
 
 ###
 
@@ -19,8 +20,8 @@ POST http://localhost:3001/users
 Content-Type: application/json
 
 {
-    "username": "test@test",
-    "password": "test"
+    "username": "joni@joni",
+    "password": "joni"
 }
 
 ###
